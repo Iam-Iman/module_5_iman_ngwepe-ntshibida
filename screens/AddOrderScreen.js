@@ -14,9 +14,7 @@ const AddOrderScreen = ({ navigation }) => {
   }, [navigation]);
 
   const createOrder = async () => {
-
   };
-
 
   return (
     <View style={styles.container}>
