@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import CustomListItem from '..components/CustomListItem';
 import { Avatar } from 'react-native-elements';
 import iman from '.assets/iman.jpeg';
@@ -8,51 +8,52 @@ import { AntDesign, SimpleLineIcons } from '@expo/vector-icons';
 
 const HomeScreen = ({navigation}) => {
 
-  const [orders, setOrders] = useState([]),
+  const signOutUser = () => {
+
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Ohh Dah",
-      headerStyle: { backgroundColor: "#ffffff" },
-      headerTitleStyle: { color: "#761486" },
-      headerTintColor: "black",
+      title: "OhhDah",
+      headerStyle: { backgroundColor: "#fff"},
+      headerTitleStyle: {color: "#000"},
+      headerTintColor: "#000",
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
           <TouchableOpacity activeOpacity={0.5}>
-            <Avatar rounded source={iman}/>
+          <Avatar rounded source={{}} />
           </TouchableOpacity>
         </View>
-
       ),
       headerRight: () => (
         <View style={{
-          flexDirection: 'row',
+          flexDirection:"row",
           justifyContent: "space-between",
           width: 80,
           marginRight: 20,
         }}>
           <TouchableOpacity activeOpacity={0.5}>
-            <AntDesign name='camerao' size={24} color='black' />
+            <AntDesign name="camerao" size={24} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.naviagate("AddOrder") } activeOpacity={0.5}>
-            <SimpleLineIcons name='pencil' size={24} color='black' />
+          <TouchableOpacity onPress={() => navigation.navigate("AddOrder")} activeOpacity={0.5}>
+            <SimpleLineIcons name="pencil" size={24} color="#000" />
           </TouchableOpacity>
         </View>
       ),
     });
+  }, [navigation]);
 
-  }, [navigation])
-
-
-  return (
+  return(
     <SafeAreaView>
       <ScrollView>
         <CustomListItem />
       </ScrollView>
     </SafeAreaView>
+
   );
 };
 
+ 
 export default HomeScreen;
 
 const styles = StyleSheet.create({});

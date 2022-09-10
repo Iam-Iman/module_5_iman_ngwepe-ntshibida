@@ -11,6 +11,7 @@ import SplashScreen from './screens/SplashScreen';
 import AddOrderScreen from './screens/AddOrderScreen';
 import RegisterScreen from './screens/RegisterScreen';
 
+
 const Stack = createStackNavigator();
 
 const globalScreenOptions = {
@@ -20,20 +21,26 @@ const globalScreenOptions = {
 };
     
 export default function App () {
-
     return (
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="Splash"
+    <Stack.Navigator
       screenOptions={globalScreenOptions}>
-      <Stack.Screen name="Splash" component={SplashScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Scre name="Register" component={RegisterScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="AddOrder" component={AddOrderScreen} />
-    </Stack.Navigator>
+      </Stack.Navigator>
   </NavigationContainer>
   );
 };
 
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

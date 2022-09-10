@@ -10,10 +10,12 @@ const AddOrderScreen = ({ navigation }) => {
     navigation.setOptions({
       title: "Add a new Order",
       headerBackTitle: "Orders",
-
     });
-
   }, [navigation]);
+
+  const createOrder = async () => {
+
+  };
 
 
   return (
@@ -22,13 +24,12 @@ const AddOrderScreen = ({ navigation }) => {
         placeholder='Enter an order name'
         value={input}
         onChangeText={(text) => setInput(text)}
+        onSubmitEditing={createOrder}
         leftIcon={
-          <Icon name="message" type="antdesign" size={24} color="black" />
+          <Icon name="food" type="antdesign" size={24} color="#761486" />
         }
       />
-      <Button title="Make an order"/>
-      
-        
+      <Button onPress={createOrder} title="Make an order"/>    
     </View>
   );
 };
@@ -37,10 +38,9 @@ export default AddOrderScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#fff",
     padding: 30,
     height: "100%",
 
   },
-
 });

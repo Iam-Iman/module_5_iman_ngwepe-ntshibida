@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import logo from './assets/logo.png';
+import splash from './assets/splash1.png';
 
 
 const SplashScreen = ({navigation }) => {
@@ -14,8 +14,7 @@ const SplashScreen = ({navigation }) => {
   if (!timePassed) {
     return (
       <View style={styles.splash}>
-        <Image source={logo} style={styles.image} />
-
+        <Image source={splash} style={styles.image} />
       </View>
 
     );

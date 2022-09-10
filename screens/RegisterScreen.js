@@ -1,7 +1,9 @@
-import { KeyboardAvoidingView, StatusBar, StyleSheet, View } from 'react-native';
+// Libraries
+import { StyleSheet, View } from 'react-native';
 import React, { useLayoutEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, Input, Text } from 'react-native-elements';
+import { KeyboardAvoidingView } from 'react-native';
 
 
 const RegisterScreen = ({ navigation }) => {
@@ -9,20 +11,22 @@ const RegisterScreen = ({ navigation }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [imageUrl, setImageUrl] = useState(""); 
+    const [imageUrl, setImageUrl] = useState("");
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerBackTitle: "Back to Login",
+        
+
         });
-
     }, [navigation]);
-
+    
     const register = () => {
-    }
+
+    };
 
     return (
-        <KeyboardAvoidingView behaviour="padding"  style={styles.container}>
+        <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <StatusBar style="light" />
             <Text h3 style={{ marginBottom: 50 }}>
                 Create an account
@@ -42,13 +46,13 @@ const RegisterScreen = ({ navigation }) => {
                     onChangeText={text => setPassword(text)}
                 />
                 <Input
-                    placeholder="Profile Picture URL (optional)"  type="text"  value={imageUrl}
+                    placeholder="Profile Picture URL (optional)"  type="text" value={imageUrl}
                     onChangeText={text => setImageUrl(text)}
                     onSubmitEditing={register}
                 />
             </View>
-            <Button containerStyle={styles.button}
-                raised onPress={register} title="register" 
+            <Button containerStyle={styles.registerButton} 
+                raised onPress={register} title="Register" 
             />
             <View style={{ height: 100 }}/>
 
@@ -56,7 +60,6 @@ const RegisterScreen = ({ navigation }) => {
   ); 
 };
 
-export default RegisterScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -67,12 +70,14 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
 
     },
-    button: {
+    registerButton: {
         width: 200,
         marginTop: 10,
+        backgroundColor: "#761486",
     },
     inputContainer: {
         width: 300,
-
     },
 });
+
+export default RegisterScreen;
