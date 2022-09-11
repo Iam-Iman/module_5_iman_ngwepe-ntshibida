@@ -1,16 +1,33 @@
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 import CustomListItem from '..components/CustomListItem';
 import { Avatar } from 'react-native-elements';
-import iman from '.assets/iman.jpeg';
 import { AntDesign, SimpleLineIcons } from '@expo/vector-icons';
+import { auth, db } from "../firebase";
+
 
 const HomeScreen = ({navigation}) => {
 
-  const signOutUser = () => {
+  const [orders, setOrders] = useState([]);
 
-  }
+  const signOutUser = () => {
+    auth.signOut().then(() => {
+      navigation.replace("Login");
+    });
+
+  };
+
+  useEffect(() => {
+    const unsubscribe = db.collection("orders").onSnaphhot(snapshot => (
+      setOrders(snapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data(),
+      })))
+    ))
+    return unsubscribe;
+  }, [])
+  
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -20,8 +37,8 @@ const HomeScreen = ({navigation}) => {
       headerTintColor: "#000",
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
-          <TouchableOpacity activeOpacity={0.5}>
-          <Avatar rounded source={{}} />
+          <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
+          <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
           </TouchableOpacity>
         </View>
       ),
@@ -43,10 +60,25 @@ const HomeScreen = ({navigation}) => {
     });
   }, [navigation]);
 
+
+const enterOrder = (id, orderName) => {
+  navigation.navigate("Order", {
+    id, 
+    orderName,
+  });
+};
+
   return(
     <SafeAreaView>
-      <ScrollView>
-        <CustomListItem />
+      <ScrollView style={styles.container}>
+        {orders.map(({id, data: { orderName }}) => (
+          <CustomListItem 
+          key={id} 
+          id={id} 
+          orderName={orderName}
+          enterOrder={enterOrder} />
+
+        ))}
       </ScrollView>
     </SafeAreaView>
 
@@ -56,4 +88,8 @@ const HomeScreen = ({navigation}) => {
  
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+  },
+});

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import React, { useLayoutEffect, useState } from 'react';
 import { Button, Input } from 'react-native-elements';
 
+
 const AddOrderScreen = ({ navigation }) => {
 
   const [ input, setInput ] = useState("");
@@ -14,6 +15,11 @@ const AddOrderScreen = ({ navigation }) => {
   }, [navigation]);
 
   const createOrder = async () => {
+    await db.collection('orders').add({
+      orderName: input
+    }).then(() => {
+      navigation.goBack()
+    }).catch((error) => alert(error));
   };
 
   return (

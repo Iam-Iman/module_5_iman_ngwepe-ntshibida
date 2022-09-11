@@ -1,20 +1,35 @@
 // Libraries
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { KeyboardAvoidingView, StyleSheet, View, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input } from "react-native-elements";
 import logo from "./assets/logo.png";
+import { BorderHorizontalOutlined } from "@ant-design/icons";
+import { auth } from "../firebase";
  
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");BorderHorizontalOutlined
   const [password, setPassword] = useState("");
 
-  const signIn = () => {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      // to check on console if User did log in
+      console.log(authUser);
+      if(authUser) {
+        navigation.replace("Home");
+      }
+    });
+    return unsubscribe;
+  }, [])
 
+  const signIn = () => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .catch((error) => alert(error));
   };
 
   return (
-    <KeyboardAvoidingView behavior="padding"style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <StatusBar style="light" />
       <Image style={styles.image} source={logo} />
         <View style={styles.inputContainer}>
@@ -24,7 +39,8 @@ const LoginScreen = ({ navigation }) => {
             placeholderTextColor="#708090"
             secureTextEntry type="password" 
             value={password}
-            onChangeText={(text) => setPassword(text)}         
+            onChangeText={(text) => setPassword(text)}  
+            onSubmitEditing={signIn}      
           />
         </View>
 

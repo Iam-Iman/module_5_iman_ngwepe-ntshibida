@@ -10,6 +10,8 @@ import LoginScreen from './screens/LoginScreen';
 import SplashScreen from './screens/SplashScreen';
 import AddOrderScreen from './screens/AddOrderScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import OrderScreen from './screens/OrderScreen';
+
 
 
 const Stack = createStackNavigator();
@@ -30,6 +32,7 @@ export default function App () {
       <Stack.Scre name="Register" component={RegisterScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="AddOrder" component={AddOrderScreen} />
+      <Stack.Screen name="Order" component={OrderScreen} />
       </Stack.Navigator>
   </NavigationContainer>
   );
